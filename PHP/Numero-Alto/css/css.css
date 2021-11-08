@@ -1,0 +1,11 @@
+.sfondoAzzurro
+{
+    background-color: aqua;
+    text-align: center;
+}
+
+.noLink, a:hover, a:active
+{
+    text-decoration: none;
+    color: inherit;
+}
