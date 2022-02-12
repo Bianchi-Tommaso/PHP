@@ -1,0 +1,27 @@
+<html>
+    <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/css.css">
+    </head>
+    <title> Php con Database </title>
+        <body class = "sfondoAzzurro centro">
+        <h1> Valuta Film </h1>
+        <br>
+        <form action="logica.php"  method = "POST">
+            <label>Nome Film: </label>
+                <input type = "text" name = "nomeFilm">
+            <br>
+            <br>
+
+            <label>Voto Film: </label>
+                <input type = "number" name = "voto">
+            <br>
+            <br>
+                <input type = "submit" value = "Aggiungi" name = "Aggiungi">
+                <input type = "submit" value = "Esci" name = "Aggiungi">
+        </form>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        </body>
+</html>

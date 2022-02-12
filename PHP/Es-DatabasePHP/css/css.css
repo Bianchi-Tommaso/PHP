@@ -1,0 +1,68 @@
+.sfondoAzzurro
+{
+    background-color: aqua;
+    text-align: center;
+}
+
+.centro
+{
+    text-align: center;
+}
+
+.noLink, a:hover, a:active
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.tg  
+{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+.tg td
+{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+.tg th
+{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight:normal;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+.tg .tg-0lax
+{
+    text-align:left;
+    vertical-align:top
+}
+
+table, th, td 
+{
+    border: 2px solid black;
+    text-align: center;
+}
+
+.center 
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
