@@ -81,11 +81,11 @@
             if ($risultato->num_rows > 0) 
             {
                 // output dati
-                echo "<table class = center>" . "<tr> <th> Voto Film Media Massima </th>";
+                echo "<table class = center>" . "<tr> <th> Voto Film Media Massima </th> </tr>";
 
                 while($row = $risultato->fetch_assoc()) 
                 {
-                    echo "<tr> <td> " . $row["VotoMassimo"]. "</td> <td>";
+                    echo "<tr> <td> " . $row["VotoMassimo"]. "</td> </tr>";
                 }
 
                 echo "</table>";
@@ -113,7 +113,8 @@
             FROM (SELECT AVG(r.Voto) AS MediaVoto FROM raccoltafilm r GROUP BY r.Film
             )mediaMassima;";
         }
-        echo "<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js integrity=sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM crossorigin=anonymous></script>
+        echo "<a class = noLink href = ../index.html>  <button  class = btn-success type = button> Indietro </button> </a>
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js integrity=sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM crossorigin=anonymous></script>
         <script src=https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js integrity=sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p crossorigin=anonymous></script>
         <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js integrity=sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF crossorigin=anonymous></script>
         </body>
