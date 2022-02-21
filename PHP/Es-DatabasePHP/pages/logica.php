@@ -8,33 +8,23 @@ if($_POST["Aggiungi"] == "Esci")
     exit();
 }
 
-//Dati Per Accedere Al DataBase
-$nomeServer = "localhost";
-$nomeUtente = "root";
-$password = "24659810";
-$nomeDatabase = "es8php";
+include "../accessoDB/accessoDB.php";
 
-//Connessione Con Il DataBase
 
-$Connessione = new mysqli($nomeServer, $nomeUtente, $password, $nomeDatabase);
+$Connessione = OpenCon();
 
-//Controllo Connessione DataBase
+session_start();
 
-if($Connessione->connect_error)
-{
-    die("Connessione Fallita: " . $Connessione->connect_error);
-}
-
-session_start();    //Lancio Della Sessione
 
 //Raccolta Dati Dal Form
 
 $_SESSION["nomeFilm"] = $_POST["nomeFilm"];
 $_SESSION["voto"] = $_POST["voto"];
 
+
 //Controllo Della Query
 
-if ($Connessione->query(Inserisci($_SESSION["nomeFilm"], $_SESSION["voto"])) === TRUE)
+if ($Connessione->query(Inserisci($_SESSION["nomeFilm"], $_SESSION["voto"], $_SESSION["idUtente"])) === TRUE)
  {
     echo "<html>
     <head>
@@ -54,17 +44,15 @@ if ($Connessione->query(Inserisci($_SESSION["nomeFilm"], $_SESSION["voto"])) ===
     echo "Errore Di Sintassi <br>";
  }
 
-$Connessione->close();  //Chiusura Connessione
+ CloseCon($Connessione);
 
+echo "<a class = noLink href = inserisci.html>  <button  class = btn-success type = button> Inserisci Nuovi Valori </button> </a>";
 
-echo "<a class = noLink href = inserisci.php>  <button  class = btn-success type = button> Inserisci Nuovi Valori </button> </a>";
-
-
-function Inserisci($FilmTitolo, $Voto)
+function Inserisci($FilmTitolo, $Voto, $idUtente)
 {
     //Composizione Query
-     return "INSERT INTO raccoltafilm (idFilm, Film, Voto)         
-    VALUES (DEFAULT, '$FilmTitolo', $Voto);";
+     return "INSERT INTO raccoltafilm (idFilm, Film, Voto, idUtente)         
+    VALUES (DEFAULT, '$FilmTitolo', '$Voto', '$idUtente');";
 
 }
 

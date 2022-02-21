@@ -1,23 +1,11 @@
 <?php
 
-//if(isset($_POST["Nome"]) && isset($_POST["Cognome"]) && isset($_POST["dataDiNascita"]) && isset($_POST["Genere"]) && isset($_POST["Email"]) && isset($_POST["Password"]))
-//{
-  //Dati Per Accedere Al DataBase
-$nomeServer = "localhost";
-$nomeUtente = "root";
-$password = "24659810";
-$nomeDatabase = "es8php";
-
-//Connessione Con Il DataBase
-
-$Connessione = new mysqli($nomeServer, $nomeUtente, $password, $nomeDatabase);
-
-//Controllo Connessione DataBase
-
-if($Connessione->connect_error)
+if(isset($_POST["Nome"]) && isset($_POST["Cognome"]) && isset($_POST["dataDiNascita"]) && isset($_POST["Genere"]) && isset($_POST["Email"]) && isset($_POST["Password"]))
 {
-    die("Connessione Fallita: " . $Connessione->connect_error);
-}
+
+  include "../accessoDB/accessoDB.php";
+
+  $Connessione = OpenCon();
 
 $Nome = $_POST["Nome"];
 $Cognome =  $_POST["Cognome"];
@@ -26,6 +14,8 @@ $Genere = $_POST["Genere"];
 $Email = $_POST["Email"];
 $Password = $_POST["Password"];
 
+$id = "";
+
 echo $Nome;
 echo $Cognome;
 echo $dataDiNascita;
@@ -33,28 +23,49 @@ echo $Genere;
 echo $Email;
 echo $Password;
 
-$queryDatiAnagrafici = "INSERT INTO datiAnagrafici (idDati, Nome, Cognome, Sesso, AnnoDiNascita)         
-VALUES (DEFAULT, '$Nome', '$Cognome', '$Genere', '$dataDiNascita');";
+$queryDatiAnagrafici = "INSERT INTO datiAnagrafici ( Nome, Cognome, Sesso, AnnoDiNascita)         
+VALUES ('$Nome', '$Cognome', '$Genere', '$dataDiNascita');";
 
-$queryDatiUtente = "INSERT INTO datiLogin(idUtente, Email, Password, idDati)
-VALUES (DEFAULT, '$Email', '$Password', DEFAULT);";
+$queryidAnagrafici = "SELECT idDati FROM datiAnagrafici ORDER BY idDati DESC LIMIT 1";
 
 if($Connessione->query($queryDatiAnagrafici) === TRUE)
 {
-  echo "OK Dati Anagrafici";
+  echo "<br> OK Dati Anagrafici <br>";
 }
 else
 {
-  echo "Errore Dati Anagrafici";
+  echo "<br> Errore Dati Anagrafici: " . $Connessione->error . "<br>";
 }
+$Connessione->query($queryidAnagrafici);
+
+if($Connessione->affected_rows == 1)
+{
+  echo "<br> OK ID Dati Anagrafici <br>";
+  $r = $Connessione->query($queryidAnagrafici);
+  $id = $r->fetch_assoc();
+  $id1 = $id['idDati'];
+}
+else
+{
+  echo "<br> Errore GET ID Dati Anagrafici: " . $Connessione->error . "<br>";
+}
+
+$queryDatiUtente = "INSERT INTO datiLogin(Email, Password, idDati)
+VALUES ('$Email', '$Password', '$id1');";
+
+
 
 if($Connessione->query($queryDatiUtente) === TRUE)
 {
-  echo "OK Dati Utente";
+  echo "<br> OK Dati Utente <br>";
 }
 else
 {
-  echo "Errore Dati Utente";
+  echo "<br> Errore Dati Utente: " . $Connessione->error . "<br>";
 }
-//}
+
+header("Location:login.html");
+}
+
+CloseCon($Connessione);
 ?>

@@ -65,6 +65,11 @@ table, th, td
     margin-bottom: 5%;
 }
 
+.dark
+{
+    background-color: gray;
+}
+
 .gradient-custom {
     /* fallback for old browsers */
     background: #0cceff;

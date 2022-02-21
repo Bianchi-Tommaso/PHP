@@ -1,14 +1,8 @@
 <?php
 
-//Dati Per Accedere Al DataBase
-$nomeServer = "localhost";
-$nomeUtente = "root";
-$password = "24659810";
-$nomeDatabase = "es8php";
+include "../accessoDB/accessoDB.php";
 
-    //Connessione Con Il DataBase
-
-    $Connessione = new mysqli($nomeServer, $nomeUtente, $password, $nomeDatabase);
+$Connessione = OpenCon();
 
     $query = "DELETE FROM raccoltafilm";
 
@@ -21,7 +15,7 @@ $nomeDatabase = "es8php";
 
     $Connessione->query($query);
 
-    $Connessione->close();  //Chiusura Connessione
+    CloseCon($Connessione);
 
-    header("Location:../index.html"); 
+    header("Location:processo.html"); 
 ?>

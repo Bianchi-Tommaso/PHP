@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS es8php;
+CREATE DATABASE es8php;
+
+USE es8php;
+
+CREATE TABLE IF NOT EXISTS datiAnagrafici (
+	idDati INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(128) NOT NULL,
+    Cognome VARCHAR(128) NOT NULL,
+    Sesso CHAR(1),
+    AnnoDiNascita DATE NOT NULL
+    );
+    
+    CREATE TABLE IF NOT EXISTS datiLogin (
+	idUtente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Email VARCHAR(128) NOT NULL,
+    Password VARCHAR(128) NOT NULL,
+    idDati INT NOT NULL,
+    
+    FOREIGN KEY(idDati) REFERENCES datiAnagrafici(idDati)
+);
+
+CREATE TABLE IF NOT EXISTS raccoltaFilm (
+    idFilm INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Film VARCHAR(128) NOT NULL,
+    Voto DOUBLE NOT NULL,
+    idUtente INT NOT NULL,
+    
+    FOREIGN KEY(idUtente) REFERENCES datiLogin (idUtente)
+);
+    
