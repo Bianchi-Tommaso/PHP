@@ -4,7 +4,7 @@ function OpenCon()
  {
     $nomeServer = "localhost";
     $nomeUtente = "root";
-    $password = "24659810";
+    $password = "";
     $nomeDatabase = "es8php";
     
     //Connessione Con Il DataBase
