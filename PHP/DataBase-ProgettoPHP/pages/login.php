@@ -1,35 +1,71 @@
 <?php
-    include "../accessoDB/accessoDB.php";
 
-    $Connessione = OpenCon();
+if(isset($_POST["Nome"]) && isset($_POST["Cognome"]) && isset($_POST["dataDiNascita"]) && isset($_POST["Genere"]) && isset($_POST["Email"]) && isset($_POST["Password"]))
+{
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-        $data = getPostData();
+  include "../accessoDB/accessoDB.php";
 
-        $query = "SELECT email, password FROM clienti WHERE email = $data['email] AND password = $data['password'];";
+  $Connessione = OpenCon();
 
-        $json_respond = $Connessione->query($query);
+$Nome = $_POST["Nome"];
+$Cognome =  $_POST["Cognome"];
+$dataDiNascita = $_POST["dataDiNascita"];
+$Genere = $_POST["Genere"];
+$Email = $_POST["Email"];
+$Password = $_POST["Password"];
 
-        echo json_encode($json_respond);
-    }
+$id = "";
 
-    function RisultatoQuery($risultatoQuery)
-    {
-        if($risultatoQuery-> num_rows == 0)
-        {
-            $json = $risultatoQuery->fetch_assoc();
-        }
+echo $Nome;
+echo $Cognome;
+echo $dataDiNascita;
+echo $Genere;
+echo $Email;
+echo $Password;
 
-        return $json;
-    }
+$queryDatiAnagrafici = "INSERT INTO datiAnagrafici ( Nome, Cognome, Sesso, AnnoDiNascita)         
+VALUES ('$Nome', '$Cognome', '$Genere', '$dataDiNascita');";
 
-    function getPostData()
-    {
-        $json = file_get_contents('php://input');
+$queryidAnagrafici = "SELECT idDati FROM datiAnagrafici ORDER BY idDati DESC LIMIT 1";
 
-        $data = json_decode($json);
+if($Connessione->query($queryDatiAnagrafici) === TRUE)
+{
+  echo "<br> OK Dati Anagrafici <br>";
+}
+else
+{
+  echo "<br> Errore Dati Anagrafici: " . $Connessione->error . "<br>";
+}
+$Connessione->query($queryidAnagrafici);
 
-        return $data;
-    }
+if($Connessione->affected_rows == 1)
+{
+  echo "<br> OK ID Dati Anagrafici <br>";
+  $r = $Connessione->query($queryidAnagrafici);
+  $id = $r->fetch_assoc();
+  $id1 = $id['idDati'];
+}
+else
+{
+  echo "<br> Errore GET ID Dati Anagrafici: " . $Connessione->error . "<br>";
+}
+
+$queryDatiUtente = "INSERT INTO datiLogin(Email, Password, idDati)
+VALUES ('$Email', '$Password', '$id1');";
+
+
+
+if($Connessione->query($queryDatiUtente) === TRUE)
+{
+  echo "<br> OK Dati Utente <br>";
+}
+else
+{
+  echo "<br> Errore Dati Utente: " . $Connessione->error . "<br>";
+}
+
+header("Location:login.html");
+}
+
+CloseCon($Connessione);
 ?>
