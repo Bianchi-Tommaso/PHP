@@ -1,22 +1,33 @@
 <?php
 
-function OpenCon()
- {
-    $nomeServer = "localhost";
-    $nomeUtente = "root";
-    $password = "";
-    $nomeDatabase = "es8php";
-    
-    //Connessione Con Il DataBase
-    
-    $Connessione = new mysqli($nomeServer, $nomeUtente, $password, $nomeDatabase);
- 
-    return $Connessione;
- }
- 
-function CloseCon($Connessione)
- {
-    $Connessione -> close();
- }
+class accessoDB
+{
+      private $nomeServer;
+      private $nomeUtente;
+      private $password;
+      private $nomeDatabase;
+      private $connessione;
 
+    public function __construct()
+   {
+      $this->nomeServer = "localhost";
+      $this->nomeUtente = "root";
+      $this->password = "";
+      $this->nomeDatabase = "progettophp";
+   }
+   
+   public function OpenCon()
+   {      
+      //Connessione Con Il DataBase
+
+      $this->connessione = mysqli_connect($this->nomeServer, $this->nomeUtente, $this->password, $this->nomeDatabase);
+   
+      return $this->connessione;
+   }
+   
+   public function CloseCon($c)
+   {
+      $c->close();
+   }
+}
 ?>
