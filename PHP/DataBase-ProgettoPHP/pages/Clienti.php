@@ -31,12 +31,12 @@ class Clienti
         $this->connessione = $connessione;
     }
 
-    public function Registrazione($data)
+    public function Registrazione()
     {
         $this->connessione = $this->accesso->OpenCon();
         
         $queryRegistrazione = "INSERT INTO clienti(codiceFiscale, nome, indirizzo, nomeUtente, password, telefono, cellulare, email)
-                               VALUES('$data->codiceFiscale', '$data->nome', '$data->indirizzo',  '$data->nomeUtente', '$data->password', '$data->telefono', '$data->cellulare', '$data->email');";
+                               VALUES('$this->codiceFiscale', '$this->nome', '$this->indirizzo',  '$this->nomeUtente', '$this->password', '$this->telefono', '$this->cellulare', '$this->email');";
         
         $this->connessione->query($queryGet);
 

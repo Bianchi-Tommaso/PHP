@@ -18,13 +18,14 @@
           <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
             <div class="card-body p-4 p-md-5">
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registrazione</h3>
-              <form >
+
+              <form action="backend.php"  method = "POST">
 
                 <div class="row">
                   <div class="col-md-6 mb-4">
 
                     <div class="form-outline">
-                      <input type="text" class="form-control form-control-lg" id="Nome" />
+                      <input type="text" class="form-control form-control-lg" id="Nome" name="Nome" />
                       <label class="form-label">Nome</label>
                     </div>
 
@@ -34,7 +35,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="codiceFiscale" maxlength="16" />
+                      <input type="text" class="form-control form-control-lg" id="codiceFiscale" name="codiceFiscale" maxlength="16" />
                       <label class="form-label">Codice Fiscale</label>
                     </div>
                   </div>
@@ -42,7 +43,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="indirizzo" />
+                      <input type="text" class="form-control form-control-lg" id="indirizzo" name="indirizzo"/>
                       <label class="form-label">Indirizzo</label>
                     </div>
                   </div>
@@ -50,7 +51,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="email" />
+                      <input type="text" class="form-control form-control-lg" id="email" name="email" />
                       <label class="form-label">Email</label>
                     </div>
                   </div>
@@ -58,7 +59,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="cellulare" />
+                      <input type="text" class="form-control form-control-lg" id="cellulare" name="cellulare" />
                       <label class="form-label">Cellulare</label>
                     </div>
                   </div>
@@ -66,7 +67,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="telefono" />
+                      <input type="text" class="form-control form-control-lg" id="telefono" name="telefono"/>
                       <label class="form-label">Telefono</label>
                     </div>
                   </div>
@@ -75,7 +76,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="iban" maxlength="27" />
+                      <input type="text" class="form-control form-control-lg" id="iban" maxlength="27" name="iban"/>
                       <label class="form-label">Codice IBAN</label>
                     </div>
                   </div>
@@ -83,7 +84,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="localita" />
+                      <input type="text" class="form-control form-control-lg" id="localita" name="localita"/>
                       <label class="form-label">Localita</label>
                     </div>
                   </div>
@@ -91,7 +92,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="citta" />
+                      <input type="text" class="form-control form-control-lg" id="citta" name="citta"/>
                       <label class="form-label">Citta'</label>
                     </div>
                   </div>
@@ -99,7 +100,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="provincia" />
+                      <input type="text" class="form-control form-control-lg" id="provincia" name="provincia"/>
                       <label class="form-label">Provincia</label>
                     </div>
                   </div>
@@ -109,7 +110,7 @@
                   <div class="col-md-6 mb-4 d-flex align-items-center">
 
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="cap" />
+                      <input type="text" class="form-control form-control-lg" id="cap" name="cap"/>
                       <label class="form-label">Cap</label>
                     </div>
                   </div>
@@ -118,7 +119,7 @@
 
                     <div class="form-check">
                       <input class="form-check-input" type="radio" id="flexRadioDefault" id="gender"
-                        value="M">
+                        value="M" name="gender">
                       <label class="form-check-label" for="flexRadioDefault1">
                         Maschio
                       </label>
@@ -126,7 +127,7 @@
 
                     <div class="form-check">
                       <input class="form-check-input" type="radio" id="flexRadioDefault" id="gender"
-                        value="F" checked>
+                        value="F" checked name="gender">
                       <label class="form-check-label" for="flexRadioDefault2">
                         Femmina
                       </label>
