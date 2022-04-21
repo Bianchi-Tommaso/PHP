@@ -1,5 +1,7 @@
 <?php
 
+require("../accessoDB/accessoDB.php");
+
 class Clienti 
 {
     private $codiceFiscale;
@@ -13,9 +15,20 @@ class Clienti
     private $accesso;
     private $connessione;
 
-    public function __construct()
+    public function __construct($codiceFiscale, $nome, $indirizzo, $nomeUtente, $password, $telefono, $cellulare, $email, $accesso, $connessione)
     {
         $this->accesso = new accessoDB();
+
+        $this->codiceFiscale = $codiceFiscale;
+        $this->nome = $nome;
+        $this->indirizzo = $indirizzo;
+        $this->nomeUtente = $nomeUtente;
+        $this->password = $password;
+        $this->telefono = $telefono;
+        $this->cellulare = $cellulare;
+        $this->email = $email;
+        $this->accesso $accesso;
+        $this->connessione = $connessione;
     }
 
     public function Registrazione($data)
