@@ -12,7 +12,7 @@ class accessoDB
    {
       $this->nomeServer = "localhost";
       $this->nomeUtente = "root";
-      $this->password = "24659810";
+      $this->password = "";
       $this->nomeDatabase = "progettophp";
    }
    
