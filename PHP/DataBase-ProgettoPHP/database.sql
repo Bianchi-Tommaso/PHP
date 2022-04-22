@@ -22,12 +22,13 @@ CREATE TABLE IF NOT EXISTS proprietari
     telefono VARCHAR(20),
     cellulare VARCHAR(20),
     email VARCHAR(30),
-    codiceIban VARCHAR(27)
+    codiceIban VARCHAR(27),
+    codiceCliente CHAR(16) REFERENCES clienti(codiceFiscale)
 );
 
 CREATE TABLE IF NOT EXISTS clienti
 (
-	codiceFiscale CHAR(16) NOT NULL,
+	codiceFiscale CHAR(16) NOT NULL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     indirizzo VARCHAR(60),
     nomeUtente VARCHAR(10),
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS appartamenti
     parcheggio CHAR(1) CHECK ((parcheggio = 'S' || parcheggio = 's') AND (parcheggio = 'N' || parcheggio ='n')),
     note TEXT,
     codiceQuartiere INT REFERENCES quartieri(codice),
-    codicePropretario CHAR(16) REFERENCES appartamenti(codiceFiscale)
+    codicePropretario CHAR(16) REFERENCES proprietario(codiceFiscale)
 );
 
 CREATE TABLE IF NOT EXISTS foto
