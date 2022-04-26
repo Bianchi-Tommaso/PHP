@@ -1,0 +1,20 @@
+.centro
+{
+    text-align: center;
+}
+
+.bordo
+{
+    border: 2px solid black;
+}
+
+
+body
+{
+    background-color: aqua;
+}
+
+p
+{
+    display: inline;
+}
