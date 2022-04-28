@@ -18,3 +18,16 @@ p
 {
     display: inline;
 }
+
+table, th, td 
+{
+    border:2px solid black;
+    text-align: center;
+    margin-left: auto;
+  margin-right: auto;
+}
+
+.barra
+{
+    background-color: yellow;
+}

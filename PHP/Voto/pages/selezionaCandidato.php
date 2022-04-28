@@ -2,6 +2,12 @@
 
 require("../accessoDB/accessoDB.php");
 
+session_start();
+
+$nomePartito = $_POST["partito"];
+
+$_SESSION["partito"] = $nomePartito;
+
 echo "<html>
 <head>
 <title>Sistema Elettorale</title>
@@ -26,16 +32,16 @@ echo "<html>
 
     <div class=bordo>
 
-    <form action=selezionaCandidato.php method=POST>
+    <form action=voto.php method=POST>
         <label>Selezionare la preferenza</label>
 
-        <select name=partito id=partito>" . Stampa() ."
+        <select name=candidato id=candidato onchange=scelta(../pages/voto.php)>" . Stampa() ."
         
         </select>
-    </div>
 
-    <input type=submit value=Scegli>
-    </form>
+        <input type=submit value=Scegli>
+        </form>
+    </div>
 
 </div>
 
@@ -60,13 +66,16 @@ function Stampa()
     
     $connessione = $DB->OpenCon();
 
-    $queryPartito = "SELECT nomePartito FROM partito";
+    $queryPartito = "SELECT c.nome, c.cognome FROM candidato c INNER JOIN partito p ON p.codicePartito = c.codicePartito WHERE p.nomePartito = '$_SESSION[partito]';";
 
     $risultato = $connessione->query($queryPartito);
 
     while($nomePartito = $risultato->fetch_array())
     {
-        $s .= "<option value=". $nomePartito["nomePartito"] . ">" . $nomePartito["nomePartito"] .  "</option>";
+        $s .= "<option value=". $nomePartito["nome"] . "-" . $nomePartito["cognome"] . ">" . $nomePartito["cognome"] . "-" . $nomePartito["nome"] . "</option>";
+
+        $_SESSION["nome"] = $nomePartito["nome"]; 
+        $_SESSION["cognome"] = $nomePartito["cognome"];     
     }
 
     return $s;

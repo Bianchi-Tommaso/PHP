@@ -1,0 +1,2 @@
+#SELECT c.nome, c.cognome FROM candidato c INNER JOIN partito p ON p.codicePartito = c.codicePartito WHERE p.nomePartito = "Per-il-bene-della-gente";
+SELECT p.nomePartito AS lista, c.voto, ROUND((c.voto / (SELECT SUM(c.voto) FROM candidato c) * 100), 2) AS "%" FROM partito p iNNER JOIN candidato c ON p.codicePartito = c.codicePartito 

@@ -2,6 +2,8 @@
 
 require("../accessoDB/accessoDB.php");
 
+session_start();
+
 echo "<html>
 <head>
 <title>Sistema Elettorale</title>
@@ -16,26 +18,27 @@ echo "<html>
 
 <div class=bordo >
     <div class=bordo centro> 
-        La prima fase del voto prevede la selezione della lista 
+       La terza fase del voto consiste nel confermare il voto
     </div>
 
     <div class=bordo>
-        Scegli la lista a cui assegnare il SUO voto dell'elenco a comparsa qui sotto
-        <small>Appena selezionata la lista, le verrà proposta l'elenco dei candidati per quella lista</small>
+        <small>Qui sotto riepilogato la sua scelta del voto</small>
     </div>
 
     <div class=bordo>
 
-    <form action=selezionaCandidato.php method=POST>
-        <label>Selezionare la preferenza</label>
+            Lista: $_SESSION[partito]
+            Candidato: $_SESSION[nome] " . " $_SESSION[cognome]
 
-        <select name=partito id=partito>" . Stampa() ."
-        
-        </select>
     </div>
 
-    <input type=submit value=Scegli>
-    </form>
+    <div class=bordo>
+    <a href = conferma.php>  <button  class = btn-success type = button> Conferma </button> </a>
+    </div>
+
+    <div class=bordo>
+    <a href = ../index.html>  <button  class = btn-success type = button> Annulla </button> </a>
+    </div>
 
 </div>
 
@@ -51,25 +54,5 @@ echo "<html>
 
 </body>
 </html>";
-
-function Stampa()
-{
-    $DB = new accessoDB();
-
-    $s = "";
-    
-    $connessione = $DB->OpenCon();
-
-    $queryPartito = "SELECT nomePartito FROM partito";
-
-    $risultato = $connessione->query($queryPartito);
-
-    while($nomePartito = $risultato->fetch_array())
-    {
-        $s .= "<option value=". $nomePartito["nomePartito"] . ">" . $nomePartito["nomePartito"] .  "</option>";
-    }
-
-    return $s;
-}
 
 ?>

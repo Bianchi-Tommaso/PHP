@@ -12,31 +12,24 @@ echo "<html>
 </head>
 <body class=centro>
 
-<h1 class = centro>Seleziona Della Lista</h1>
+<h1 class = centro>Classifica</h1> 
 
-<div class=bordo >
-    <div class=bordo centro> 
-        La prima fase del voto prevede la selezione della lista 
-    </div>
+<table>
+  <tr>
+    <th>LISTA</th>
+    <th>VOTO</th>
+    <th>%</th>
+    <th></th>
+  </tr>
 
-    <div class=bordo>
-        Scegli la lista a cui assegnare il SUO voto dell'elenco a comparsa qui sotto
-        <small>Appena selezionata la lista, le verrà proposta l'elenco dei candidati per quella lista</small>
-    </div>
+  ".  Classifica() ."
 
-    <div class=bordo>
+</table>
 
-    <form action=selezionaCandidato.php method=POST>
-        <label>Selezionare la preferenza</label>
+<br>
 
-        <select name=partito id=partito>" . Stampa() ."
-        
-        </select>
-    </div>
-
-    <input type=submit value=Scegli>
-    </form>
-
+<div class=bordo>
+    <a href = ../index.html>  <button  class = btn-success type = button> Indieti </button> </a>
 </div>
 
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js
@@ -52,24 +45,28 @@ echo "<html>
 </body>
 </html>";
 
-function Stampa()
+
+function Classifica()
 {
+ 
     $DB = new accessoDB();
 
     $s = "";
     
     $connessione = $DB->OpenCon();
 
-    $queryPartito = "SELECT nomePartito FROM partito";
+    $queryPartito = "SELECT p.nomePartito AS lista, c.voto,  ROUND((c.voto / (SELECT SUM(c.voto) FROM candidato c) * 100), 2) AS '%' FROM partito p iNNER JOIN candidato c ON p.codicePartito = c.codicePartito;";
 
     $risultato = $connessione->query($queryPartito);
 
-    while($nomePartito = $risultato->fetch_array())
+
+    while($classifica = $risultato->fetch_assoc())
     {
-        $s .= "<option value=". $nomePartito["nomePartito"] . ">" . $nomePartito["nomePartito"] .  "</option>";
+        $s .= "<tr> <td> " . $classifica["lista"] . "</td> <td> " . $classifica["voto"] . "</td> <td> " . $classifica["%"] . "</td> <td> <div class=barra style=height:10px;width:".$classifica["%"]."%></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</></td> </tr>" ;
     }
 
     return $s;
+
 }
 
 ?>

@@ -2,6 +2,8 @@
 
 require("../accessoDB/accessoDB.php");
 
+session_start();
+
 echo "<html>
 <head>
 <title>Sistema Elettorale</title>
@@ -12,31 +14,16 @@ echo "<html>
 </head>
 <body class=centro>
 
-<h1 class = centro>Seleziona Della Lista</h1>
+<h1 class = centro>Registrazione del voto</h1>
 
 <div class=bordo >
-    <div class=bordo centro> 
-        La prima fase del voto prevede la selezione della lista 
-    </div>
+    
+    il suo voto è stato registrato
 
-    <div class=bordo>
-        Scegli la lista a cui assegnare il SUO voto dell'elenco a comparsa qui sotto
-        <small>Appena selezionata la lista, le verrà proposta l'elenco dei candidati per quella lista</small>
-    </div>
+</div>
 
-    <div class=bordo>
-
-    <form action=selezionaCandidato.php method=POST>
-        <label>Selezionare la preferenza</label>
-
-        <select name=partito id=partito>" . Stampa() ."
-        
-        </select>
-    </div>
-
-    <input type=submit value=Scegli>
-    </form>
-
+<div class=bordo>
+<a href = voti.php>  <button  class = btn-success type = button> Classifica </button> </a>
 </div>
 
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js
@@ -52,7 +39,9 @@ echo "<html>
 </body>
 </html>";
 
-function Stampa()
+Vota();
+
+function Vota()
 {
     $DB = new accessoDB();
 
@@ -60,16 +49,11 @@ function Stampa()
     
     $connessione = $DB->OpenCon();
 
-    $queryPartito = "SELECT nomePartito FROM partito";
+    $queryPartito = "UPDATE candidato SET voto = voto + 1 WHERE nome = '$_SESSION[nome]' AND cognome = '$_SESSION[cognome]';";
 
     $risultato = $connessione->query($queryPartito);
 
-    while($nomePartito = $risultato->fetch_array())
-    {
-        $s .= "<option value=". $nomePartito["nomePartito"] . ">" . $nomePartito["nomePartito"] .  "</option>";
-    }
 
-    return $s;
 }
 
 ?>
