@@ -1,0 +1,23 @@
+.sfondoAzzurro
+{
+    background-color: aqua;
+    text-align: center;
+}
+
+.centro
+{
+    text-align: center;
+}
+
+table, th, td 
+{
+    border: 2px solid black;
+    text-align: center;
+}
+
+.center 
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
