@@ -17,7 +17,10 @@ echo "
         <body class = sfondoAzzurro centro>
         <table>
             <tr>
-                <th>Nome Genere</th>
+                <th>Titolo Album</th>
+                <th>Data Pubblicazione</th>
+                <th>Durata Album</th>
+                <th>Immagine</th>
             </tr>
 
        " . Stampa() . "
@@ -36,17 +39,19 @@ function Stampa()
     $DB = new accessoDB();
 
     $s = "";
+
+    $a = $_POST["artista"];
     
     $connessione = $DB->OpenCon();
 
-    $querySottoGenere = "SELECT s.nome_sottogenere FROM genere g INNER JOIN sottogeneri s ON s.id_genere = g.id_genere WHERE g.nome_genere = '$_POST[genere]';";
+    $queryArtista = "SELECT a.titolo_album, a.data_pubblicazione, a.durata_album, a.link FROM album a INNER JOIN musicista m ON m.id_gruppo = a.id_gruppo WHERE m.nome_artista = '$a';";
 
-    $risultato = $connessione->query($querySottoGenere);
+    $risultato = $connessione->query($queryArtista);
 
 
-    while($classifica = $risultato->fetch_assoc())
+    while($artista = $risultato->fetch_assoc())
     {
-        $s .= "<tr> <td> " . $classifica["nome_sottogenere"] . "</td></tr>" ;
+        $s .= "<tr> <td>" . $artista["titolo_album"] . "</td><td> " . $artista["data_pubblicazione"] . "</td><td> " . $artista["durata_album"] . "</td><td> <img src=" . $artista["link"] . "width=150px; heigth=150px;></td></tr>";
     }
 
     return $s;
